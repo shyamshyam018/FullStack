@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WorkView</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            scroll-behavior: smooth;
+            font-family: 'Roboto', sans-serif;
+        }
+        .bg-image {
+            background-image: url('../../static/images/image.png');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .content {
+            text-align: center;
+        }
+        .section {
+            padding: 60px 20px;
+            background-color: #f7f7f7;
+        }
+        .navbar {
+            background-color: #ffffff;
+            padding: 20px;
+        }
+        .navbar-brand img {
+            max-height: 40px; /* Adjust as needed */
+        }
+        .navbar-nav .nav-link {
+            color: #333;
+            font-weight: 700;
+        }
+        .navbar-nav .nav-link:hover {
+            color: #0056b3;
+        }
+        .footer {
+            background-color: #343a40;
+            color: white;
+            padding: 20px 0;
+        }
+        .about, .services {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .about p, .services p {
+            color: #333;
+        }
+        .about h2, .services h2 {
+            color: #0056b3;
+            font-weight: 700;
+        }
+        .contact-form {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="https://via.placeholder.com/150" alt="WorkView Logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#services">Services</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Login
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">Admin</a></li>
+                            <li><a class="dropdown-item" href="#">Staff</a></li>
+                            <li><a class="dropdown-item" href="#">Guest</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Landing Page Content -->
+    <div class="bg-image">
+        <div class="content">
+            <h1 class="display-1 fw-bold">WELCOME TO WORKVIEW</h1>
+            <p class="lead fw-semibold">WE HELP YOU MANAGE YOUR WORK ON THE GO!</p>
+            <a href="#services" class="btn btn-primary btn-lg fw-medium" style="margin-right: 2rem;">Get Started</a>
+            <a href="#contact" class="btn btn-outline-light btn-lg fw-medium">Contact Us</a>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="container">
+            <div class="about p-4">
+                <h2>About WorkView</h2>
+                <p>
+
+                    WorkView is a cutting-edge management application designed to bridge the gap between employees and supervisors, ensuring seamless workflow and efficient management. Our platform provides a comprehensive suite of tools to enhance productivity and streamline operations.
+                    
+                    Our Mission:
+                    To empower organizations with a powerful, intuitive platform that facilitates effective communication, task management, and reporting, ultimately driving productivity and success.
+                    
+                    Key Features:
+                    
+                    Real-Time Data Management: Effortlessly store and manage worker information, ensuring that all data is up-to-date and accessible.
+                    Task Assignment: Supervisors can easily assign tasks, set deadlines, and monitor progress, while employees can view and update their tasks in real-time.
+                    Daily Reports: Employees can generate detailed daily reports that are reviewed and approved by supervisors, facilitating transparent and efficient performance tracking.
+                    Our Vision:
+                    To revolutionize workplace management by providing innovative solutions that adapt to the dynamic needs of modern organizations, fostering a collaborative and productive work environment.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="section">
+        <div class="container">
+            <div class="services p-4">
+                <h2>Services</h2>
+                <p>Our project is structured as follows:</p>
+                <ul>
+                    <li>Landing Page</li>
+                    <li>Main App</li>
+                    <li>Dashboard (specific for two users: employees and supervisors)</li>
+                    <li>Features include assigning work, generating worksheets, overseeing work status, and worker status.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form -->
+    <section id="contact" class="section">
+        <div class="container">
+            <div class="contact-form">
+                <h2>Contact Us</h2>
+                <form>
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email address</label>
+                        <input type="email" class="form-control" id="email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="message" class="form-label">Message</label>
+                        <textarea class="form-control" id="message" rows="3" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer text-center">
+        <div class="container">
+            <p>&copy; 2024 WorkView. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
