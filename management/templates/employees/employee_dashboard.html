@@ -1,7 +1,17 @@
-<!-- employees/employee_dashboard.html -->
+<!-- templates/dashboard.html -->
 {% extends 'base.html' %}
-{% block title %}Employee Dashboard{% endblock %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block sidebar %}
+    <!-- Custom sidebar content for the dashboard -->
+    <ul class="list-group">
+        <li class="list-group-item"><a href="#">Dashboard Home</a></li>
+        <li class="list-group-item"><a href="#">Dashboard Settings</a></li>
+    </ul>
+{% endblock %}
+
 {% block content %}
-<h1>Welcome to the Employee Dashboard</h1>
-<!-- Employee dashboard content -->
+    <h1>Welcome to the Dashboard</h1>
+    <p>This is the main content of the dashboard page.</p>
 {% endblock %}

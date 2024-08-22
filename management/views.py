@@ -3,7 +3,7 @@ from django.shortcuts import render
 from .models import Worker, WorkAssignment, Attendance
 
 def home(request):
-    return render(request, 'home.html')
+    return render(request, 'base.html')
 
 def assign_work(request):
     # Logic for assigning work

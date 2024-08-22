@@ -53,6 +53,11 @@
             color: white;
             padding: 20px 0;
         }
+        .nav-item{
+            margin-left: 3rem;
+            font-weight: bold;
+            font-size: larger;
+        }
         .about, .services {
             background-color: #ffffff;
             border-radius: 8px;
@@ -71,69 +76,6 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             padding: 20px;
         }
-        a #services{
-            background-color: #0056b3;
-        }
-
-
-        
-section#contact {
-  background-color: #212529;
-  background-image: url("../assets/img/map-image.png");
-  background-repeat: no-repeat;
-  background-position: center;
-}
-section#contact .section-heading {
-  color: #fff;
-}
-section#contact form#contactForm .form-group {
-  margin-bottom: 1.5rem;
-}
-section#contact form#contactForm .form-group input,
-section#contact form#contactForm .form-group textarea {
-  padding: 1.25rem;
-}
-section#contact form#contactForm .form-group input.form-control {
-  height: auto;
-}
-section#contact form#contactForm .form-group-textarea {
-  height: 100%;
-}
-section#contact form#contactForm .form-group-textarea textarea {
-  height: 100%;
-  min-height: 10rem;
-}
-section#contact form#contactForm p.help-block {
-  margin: 0;
-}
-section#contact form#contactForm .form-control:focus {
-  border-color: #ffc800;
-  box-shadow: none;
-}
-section#contact form#contactForm ::-webkit-input-placeholder {
-  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  font-weight: 700;
-  color: #ced4da;
-}
-section#contact form#contactForm :-moz-placeholder {
-  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  font-weight: 700;
-  color: #ced4da;
-}
-section#contact form#contactForm ::-moz-placeholder {
-  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  font-weight: 700;
-  color: #ced4da;
-}
-section#contact form#contactForm :-ms-input-placeholder {
-  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  font-weight: 700;
-  color: #ced4da;
-}
-
-.footer p {
-    margin-bottom: 0;
-}
 
 
    
@@ -145,7 +87,7 @@ section#contact form#contactForm :-ms-input-placeholder {
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container">
             <a class="navbar-brand" href="#">
-                <img src="../../static/images/Logo.png" height="30px" width="250px" alt="WorkView Logo">
+                <img src="../../static/images/logo.png" height="50px" width="150px" alt="WorkView Logo">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -166,9 +108,9 @@ section#contact form#contactForm :-ms-input-placeholder {
                             Login
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Admin</a></li>
-                            <li><a class="dropdown-item" href="#">Staff</a></li>
-                            <li><a class="dropdown-item" href="#">Guest</a></li>
+                            <li><a class="dropdown-item" href="{% url 'login' %}">Admin</a></li>
+                            <li><a class="dropdown-item" href="{% url 'login' %}">Staff</a></li>
+                            <li><a class="dropdown-item" href="{% url 'register' %}">Guest</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -181,10 +123,73 @@ section#contact form#contactForm :-ms-input-placeholder {
         <div class="content">
             <h1 class="display-1 fw-bold">WELCOME TO WORKVIEW</h1>
             <p class="lead fw-semibold">WE HELP YOU MANAGE YOUR WORK ON THE GO!</p>
-            <a href="#services" class="btn btn-primary btn-lg fw-medium" style="margin-right: 2rem;">Get Started</a>
-            <a href="#contact" class="btn btn-outline-light btn-lg fw-medium">Contact Us</a>
+            <a href="{% url 'register' %}" class="btn btn-primary btn-lg fw-bold" style="margin-right: 2rem;">Get Started</a>
+            <a href="#contact" class="btn btn-outline-light btn-lg fw-bold">Tutorials</a>
         </div>
     </div>
+
+     <!-- About Section -->
+     <section id="about" class="section">
+        <div class="container">
+            <div class="about p-4">
+                <h2>About WorkView</h2>
+                <p>
+
+                    WorkView is a cutting-edge management application designed to bridge the gap between employees and supervisors, ensuring seamless workflow and efficient management. Our platform provides a comprehensive suite of tools to enhance productivity and streamline operations.
+                    
+                    Our Mission:
+                    To empower organizations with a powerful, intuitive platform that facilitates effective communication, task management, and reporting, ultimately driving productivity and success.
+                    
+                    Key Features:
+                    
+                    Real-Time Data Management: Effortlessly store and manage worker information, ensuring that all data is up-to-date and accessible.
+                    Task Assignment: Supervisors can easily assign tasks, set deadlines, and monitor progress, while employees can view and update their tasks in real-time.
+                    Daily Reports: Employees can generate detailed daily reports that are reviewed and approved by supervisors, facilitating transparent and efficient performance tracking.
+                    Our Vision:
+                    To revolutionize workplace management by providing innovative solutions that adapt to the dynamic needs of modern organizations, fostering a collaborative and productive work environment.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="section">
+        <div class="container">
+            <div class="services p-4">
+                <h2>Services</h2>
+                <p>Our project is structured as follows:</p>
+                <ul>
+                    <li>Landing Page</li>
+                    <li>Main App</li>
+                    <li>Dashboard (specific for two users: employees and supervisors)</li>
+                    <li>Features include assigning work, generating worksheets, overseeing work status, and worker status.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form -->
+    <section id="contact" class="section">
+        <div class="container">
+            <div class="contact-form">
+                <h2>Contact Us</h2>
+                <form>
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email address</label>
+                        <input type="email" class="form-control" id="email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="message" class="form-label">Message</label>
+                        <textarea class="form-control" id="message" rows="3" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </section>
 
 
   
@@ -197,43 +202,7 @@ section#contact form#contactForm :-ms-input-placeholder {
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<!-- Code injected by live-server -->
-<script>
-	// <![CDATA[  <-- For SVG support
-	if ('WebSocket' in window) {
-		(function () {
-			function refreshCSS() {
-				var sheets = [].slice.call(document.getElementsByTagName("link"));
-				var head = document.getElementsByTagName("head")[0];
-				for (var i = 0; i < sheets.length; ++i) {
-					var elem = sheets[i];
-					var parent = elem.parentElement || head;
-					parent.removeChild(elem);
-					var rel = elem.rel;
-					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
-						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
-						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
-					}
-					parent.appendChild(elem);
-				}
-			}
-			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
-			var address = protocol + window.location.host + window.location.pathname + '/ws';
-			var socket = new WebSocket(address);
-			socket.onmessage = function (msg) {
-				if (msg.data == 'reload') window.location.reload();
-				else if (msg.data == 'refreshcss') refreshCSS();
-			};
-			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
-				console.log('Live reload enabled.');
-				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
-			}
-		})();
-	}
-	else {
-		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
-	}
-	// ]]>
-</script>
+
+
 </body>
 </html>
