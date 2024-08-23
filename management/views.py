@@ -5,9 +5,13 @@ from .models import Worker, WorkAssignment, Attendance
 def home(request):
     return render(request, 'base.html')
 
-def assign_work(request):
+def create(request):
     # Logic for assigning work
-    return render(request, 'assign_work.html')
+    return render(request, 'create.html')
+
+def manage(request):
+    # Logic for assigning work
+    return render(request, 'manage.html')
 
 def generate_worksheet(request):
     # Logic for generating worksheets
