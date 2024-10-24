@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "management",
     "landing",
-    "authentication"
+    "authentication",
+    "crispy_forms"
 ]
 
 MIDDLEWARE = [
@@ -75,7 +76,7 @@ TEMPLATES = [
 
 
 WSGI_APPLICATION = "WorkView.wsgi.application"
-
+CRISPY_TEMPLATE_PACK = 'bootstrap4' 
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
@@ -86,6 +87,7 @@ DATABASES = {
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
+
 
 
 # Password validation

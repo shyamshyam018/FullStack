@@ -1,149 +1,215 @@
 <div class="col-12 grid-margin">
     <div class="card">
-      <div class="card-body">
-        <h4 class="card-title">Horizontal Two column</h4>
-        <form class="form-sample">
-          <p class="card-description">
-            Personal info
-          </p>
-          <div class="row">
-            <div class="col-md-6">
-              <div class="form-group row">
-                <label class="col-sm-3 col-form-label">First Name</label>
-                <div class="col-sm-9">
-                  <input type="text" class="form-control" />
+        <div class="card-body">
+            <h4 class="card-title">WorkView's Today's Work</h4>
+            <form method="POST" action="{% url 'form_submission' %}" class="form-sample">
+                {% csrf_token %}
+                <p class="card-description">Work Registration</p>
+
+                <!-- date && session -->
+                <div class="row">
+                    <!-- date -->
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Date</label>
+                            <div class="col-sm-9">
+                                <input type="date" name="date" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                    <!-- session -->
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Session</label>
+                            <div class="col-sm-9">
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input type="radio" name="session" value="forenoon" class="form-check-input"> Forenoon
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input type="radio" name="session" value="afternoon" class="form-check-input"> Afternoon
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end -->
                 </div>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group row">
-                <label class="col-sm-3 col-form-label">Last Name</label>
-                <div class="col-sm-9">
-                  <input type="text" class="form-control" />
+                <!-- end -->
+
+                <!-- task && work -->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Task ID</label>
+                            <div class="col-sm-9">
+                                <select name="task" class="form-select" aria-label="Task ID">
+                                    <option value="" selected>Select Task ID</option>
+                                    {% for value, label in task_choices %}
+                                        <option value="{{ value }}">{{ label }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Work Nature</label>
+                            <div class="col-sm-9">
+                                <select name="work_nature" class="form-select" aria-label="Nature of Work">
+                                    <option value="" selected>Work Nature</option>
+                                    {% for value, label in work_nature_choices %}
+                                        <option value="{{ value }}">{{ label }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6">
-              <div class="form-group row">
-                <label class="col-sm-3 col-form-label">Gender</label>
-                <div class="col-sm-9">
-                  <select class="form-select form-select">
-                    <option>Male</option>
-                    <option>Female</option>
-                  </select>
+                <!-- end -->
+
+                <!-- add staffs -->
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Staffs</label>
+                            <div class="col-sm-9">
+                                <button type="button" class="btn btn-primary mt-2" id="staffCountBtn">
+                                    Number of Staff Selected <span class="badge badge-light" id="staffCount">0</span>
+                                </button>
+                                <input type="text" name="staffs" class="form-control" id="staffInput" placeholder="Enter staff name" />
+                                <small>Press Enter to add</small>
+                                <div class="tag-container mt-2" id="tagContainer"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group row">
-                <label class="col-sm-3 col-form-label">Date of Birth</label>
-                <div class="col-sm-9">
-                  <input class="form-control" placeholder="dd/mm/yyyy"/>
+
+                <p class="card-description">Timings</p>
+                <!-- In Time && Out Time -->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">In Time</label>
+                            <div class="col-sm-9">
+                                <input type="time" name="in_time" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Out Time</label>
+                            <div class="col-sm-9">
+                                <input type="time" name="out_time" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6">
-              <div class="form-group row">
-                <label class="col-sm-3 col-form-label">Category</label>
-                <div class="col-sm-9">
-                  <select class="form-select form-select">
-                    <option>Category1</option>
-                    <option>Category2</option>
-                    <option>Category3</option>
-                    <option>Category4</option>
-                  </select>
+
+                <!-- location && status -->
+                <div class="row">
+                    <!-- location -->
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Location</label>
+                            <div class="col-sm-9">
+                                <select name="location" class="form-select" aria-label="Location">
+                                    <option value="" selected>Select Location</option>
+                                    {% for value, label in location_choices %}
+                                        <option value="{{ value }}">{{ label }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- status -->
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Status</label>
+                            <div class="col-sm-9">
+                                <select name="status" class="form-select">
+                                    <option value="" selected>Select Status</option>
+                                    <option value="completed">Completed</option>
+                                    <option value="inprogress">In Progress</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group row">
-                <label class="col-sm-3 col-form-label">Membership</label>
-                <div class="col-sm-4">
-                  <div class="form-check">
-                    <label class="form-check-label">
-                      <input type="radio" class="form-check-input" name="membershipRadios" id="membershipRadios1" value="" checked>
-                      Free
-                    </label>
-                  </div>
+
+                <!-- remarks -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Remarks</label>
+                            <div class="col-sm-9">
+                                <textarea name="remarks" class="form-control" rows="4" placeholder="Enter remarks here..."></textarea>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-sm-5">
-                  <div class="form-check">
-                    <label class="form-check-label">
-                      <input type="radio" class="form-check-input" name="membershipRadios" id="membershipRadios2" value="option2">
-                      Professional
-                    </label>
-                  </div>
+                
+                <!-- submit button -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group row">
+                            <label class="col-sm-5 col-form-label"></label>
+                            <div class="col-sm-1">
+                                <button type="submit" class="btn btn-primary float-right">
+                                    Submit <i class="fas fa-paper-plane"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-          </div>
-          <p class="card-description">
-            Address
-          </p>
-          <div class="row">
-            <div class="col-md-6">
-              <div class="form-group row">
-                <label class="col-sm-3 col-form-label">Address 1</label>
-                <div class="col-sm-9">
-                  <input type="text" class="form-control" />
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group row">
-                <label class="col-sm-3 col-form-label">State</label>
-                <div class="col-sm-9">
-                  <input type="text" class="form-control" />
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6">
-              <div class="form-group row">
-                <label class="col-sm-3 col-form-label">Address 2</label>
-                <div class="col-sm-9">
-                  <input type="text" class="form-control" />
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group row">
-                <label class="col-sm-3 col-form-label">Postcode</label>
-                <div class="col-sm-9">
-                  <input type="text" class="form-control" />
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6">
-              <div class="form-group row">
-                <label class="col-sm-3 col-form-label">City</label>
-                <div class="col-sm-9">
-                  <input type="text" class="form-control" />
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group row">
-                <label class="col-sm-3 col-form-label">Country</label>
-                <div class="col-sm-9">
-                  <select class="form-select form-select">
-                    <option>America</option>
-                    <option>Italy</option>
-                    <option>Russia</option>
-                    <option>Britain</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-          </div>
-        </form>
-      </div>
+            </form>
+        </div>
     </div>
-  </div>
+</div>
+
+<!-- script -->
+<script>
+    // JavaScript code for handling staff tags
+    const staffInput = document.getElementById('staffInput');
+    const tagContainer = document.getElementById('tagContainer');
+    const staffCount = document.getElementById('staffCount');
+
+    function createTag(name) {
+        const tag = document.createElement('span');
+        tag.className = 'badge badge-primary';
+        tag.textContent = name;
+
+        const removeButton = document.createElement('button');
+        removeButton.type = 'button';
+        removeButton.className = 'btn-close';
+        removeButton.onclick = function() {
+            tagContainer.removeChild(tag);
+            updateStaffCount();
+        };
+
+        tag.appendChild(removeButton);
+        tagContainer.appendChild(tag);
+        updateStaffCount();
+    }
+
+    function updateStaffCount() {
+        staffCount.textContent = tagContainer.children.length;
+    }
+
+    staffInput.addEventListener('keypress', function(event) {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            const name = staffInput.value.trim();
+            if (name) {
+                createTag(name);
+                staffInput.value = '';
+            }
+        }
+    });
+
+    document.getElementById('staffCountBtn').addEventListener('click', function() {
+        alert('Total Staff Selected: ' + tagContainer.children.length);
+    });
+</script>

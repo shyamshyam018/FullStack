@@ -1,3 +1,6 @@
 from django.contrib import admin
+from .models import WorkAssignment
 
-# Register your models here.
+@admin.register(WorkAssignment)
+class WorkAssignmentAdmin(admin.ModelAdmin):
+    list_display = ('task', 'location', 'number_of_workers', 'duration', 'date', 'session', 'status')
