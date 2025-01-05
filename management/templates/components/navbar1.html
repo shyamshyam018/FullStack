@@ -13,27 +13,30 @@
         <li class="nav-item nav-profile dropdown">
           <a class="nav-link" href="#" data-bs-toggle="dropdown" id="profileDropdown">
             <img src="../../static/assets/images/faces/face5.jpg" alt="profile"/>
-            <span class="nav-profile-name">Shyam Raj</span>
+            <span class="nav-profile-name">{{ user.username|capfirst }} [{{ user.groups.all|first|capfirst }}]
+            
+            </span>
           </a>
           <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
             <a class="dropdown-item">
               <i class="typcn typcn-cog-outline text-primary"></i>
               Settings
             </a>
-            <a class="dropdown-item">
+            <a class="dropdown-item btn btn-primary text-dark btn-lg" href="{% url 'index' %}">
               <i class="typcn typcn-eject text-primary"></i>
               Logout
-            </a>
+          </a>
+          
           </div>
         </li>
         <li class="nav-item nav-user-status dropdown">
-            <p class="mb-0">Last login was 23 hours ago.</p>
+            <!-- <p class="mb-0 ">Last Login: {{ user.last_login|date:"D, d M Y H:i" }}</p> -->
         </li>
       </ul>
       <ul class="navbar-nav navbar-nav-right">
         <li class="nav-item nav-date dropdown">
           <a class="nav-link d-flex justify-content-center align-items-center" href="javascript:;">
-            <h6 class="date mb-0">Today : Aug 23</h6>
+            <h6 class="date mb-0">Today is: {% now "l, F j" %}</h6>
             <i class="typcn typcn-calendar"></i>
           </a>
         </li>

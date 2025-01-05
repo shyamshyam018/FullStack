@@ -1,17 +1,13 @@
 from django import forms
-from .models import WorkAssignment
+from .models import Work
 
-class WorkAssignmentForm(forms.ModelForm):
+class WorkForm(forms.ModelForm):
     class Meta:
-        model = WorkAssignment
-        fields = [
-            'task', 'location', 'number_of_workers', 'duration', 'date', 'session',
-            'work_nature', 'staffs', 'in_time', 'out_time', 'status', 'remarks'
-        ]
-        
+        model = Work
+        fields = ['date', 'session', 'task', 'work_nature', 'in_time', 'out_time', 'location', 'remarks', 'staffs']
         widgets = {
-            'date': forms.DateInput(attrs={'type': 'date'}),
-            'in_time': forms.TimeInput(attrs={'type': 'time'}),
-            'out_time': forms.TimeInput(attrs={'type': 'time'}),
-            'staffs': forms.Textarea(attrs={'placeholder': 'Enter staff names, separated by commas'}),
+            'session': forms.Select(attrs={'class': 'form-control'}),  # Render session as a dropdown
+            'date': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
+            'in_time': forms.TimeInput(attrs={'type': 'time', 'class': 'form-control'}),
+            'out_time': forms.TimeInput(attrs={'type': 'time', 'class': 'form-control'}),
         }

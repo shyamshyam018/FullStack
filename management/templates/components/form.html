@@ -2,99 +2,99 @@
     <div class="card">
         <div class="card-body">
             <h4 class="card-title">WorkView's Today's Work</h4>
-            <form method="POST" action="{% url 'form_submission' %}" class="form-sample">
+            <form method="POST" action="{% url 'create' %}" class="form-sample">
                 {% csrf_token %}
+                
                 <p class="card-description">Work Registration</p>
 
-                <!-- date && session -->
+                <!-- Date and Session Fields -->
                 <div class="row">
-                    <!-- date -->
                     <div class="col-md-6">
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Date</label>
                             <div class="col-sm-9">
-                                <input type="date" name="date" class="form-control" />
+                                {{ form.date }}
+                                {% if form.date.errors %}
+                                    <div class="alert alert-danger">
+                                        {% for error in form.date.errors %}
+                                            <p>{{ error }}</p>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
-                    <!-- session -->
                     <div class="col-md-6">
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Session</label>
                             <div class="col-sm-9">
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        <input type="radio" name="session" value="forenoon" class="form-check-input"> Forenoon
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        <input type="radio" name="session" value="afternoon" class="form-check-input"> Afternoon
-                                    </label>
-                                </div>
+                                <!-- Render the dropdown directly -->
+                                {{ form.session }}
+                                
+                                <!-- Display errors for the session field -->
+                                {% if form.session.errors %}
+                                    <div class="alert alert-danger">
+                                        {% for error in form.session.errors %}
+                                            <p>{{ error }}</p>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
-                    <!-- end -->
+                    
+                    
+                <!-- Task ID and Work Nature -->
+                <div class="form-group">
+                    <label for="task">Task ID</label>
+                    {{ form.task }}
+                    {% if form.task.errors %}
+                        <div class="alert alert-danger">
+                            {% for error in form.task.errors %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
                 </div>
-                <!-- end -->
 
-                <!-- task && work -->
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Task ID</label>
-                            <div class="col-sm-9">
-                                <select name="task" class="form-select" aria-label="Task ID">
-                                    <option value="" selected>Select Task ID</option>
-                                    {% for value, label in task_choices %}
-                                        <option value="{{ value }}">{{ label }}</option>
-                                    {% endfor %}
-                                </select>
-                            </div>
+                <div class="form-group">
+                    <label for="work_nature">Work Nature</label>
+                    {{ form.work_nature }}
+                    {% if form.work_nature.errors %}
+                        <div class="alert alert-danger">
+                            {% for error in form.work_nature.errors %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
                         </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Work Nature</label>
-                            <div class="col-sm-9">
-                                <select name="work_nature" class="form-select" aria-label="Nature of Work">
-                                    <option value="" selected>Work Nature</option>
-                                    {% for value, label in work_nature_choices %}
-                                        <option value="{{ value }}">{{ label }}</option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-                        </div>
-                    </div>
+                    {% endif %}
                 </div>
-                <!-- end -->
 
-                <!-- add staffs -->
+                <!-- Staffs Input -->
                 <div class="row">
                     <div class="col-md-8">
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Staffs</label>
                             <div class="col-sm-9">
-                                <button type="button" class="btn btn-primary mt-2" id="staffCountBtn">
-                                    Number of Staff Selected <span class="badge badge-light" id="staffCount">0</span>
-                                </button>
-                                <input type="text" name="staffs" class="form-control" id="staffInput" placeholder="Enter staff name" />
-                                <small>Press Enter to add</small>
-                                <div class="tag-container mt-2" id="tagContainer"></div>
+                                {{ form.staffs }}
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <p class="card-description">Timings</p>
-                <!-- In Time && Out Time -->
+                <!-- Timings Input -->
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">In Time</label>
                             <div class="col-sm-9">
-                                <input type="time" name="in_time" class="form-control" />
+                                {{ form.in_time }}
+                                {% if form.in_time.errors %}
+                                    <div class="alert alert-danger">
+                                        {% for error in form.in_time.errors %}
+                                            <p>{{ error }}</p>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
@@ -102,60 +102,48 @@
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Out Time</label>
                             <div class="col-sm-9">
-                                <input type="time" name="out_time" class="form-control" />
+                                {{ form.out_time }}
+                                {% if form.out_time.errors %}
+                                    <div class="alert alert-danger">
+                                        {% for error in form.out_time.errors %}
+                                            <p>{{ error }}</p>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- location && status -->
-                <div class="row">
-                    <!-- location -->
-                    <div class="col-md-6">
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Location</label>
-                            <div class="col-sm-9">
-                                <select name="location" class="form-select" aria-label="Location">
-                                    <option value="" selected>Select Location</option>
-                                    {% for value, label in location_choices %}
-                                        <option value="{{ value }}">{{ label }}</option>
-                                    {% endfor %}
-                                </select>
-                            </div>
+                <!-- Location Input -->
+                <div class="form-group">
+                    <label for="location">Location</label>
+                    {{ form.location }}
+                    {% if form.location.errors %}
+                        <div class="alert alert-danger">
+                            {% for error in form.location.errors %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
                         </div>
-                    </div>
-                    <!-- status -->
-                    <div class="col-md-6">
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Status</label>
-                            <div class="col-sm-9">
-                                <select name="status" class="form-select">
-                                    <option value="" selected>Select Status</option>
-                                    <option value="completed">Completed</option>
-                                    <option value="inprogress">In Progress</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
+                    {% endif %}
                 </div>
 
-                <!-- remarks -->
+                <!-- Remarks Input -->
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Remarks</label>
                             <div class="col-sm-9">
-                                <textarea name="remarks" class="form-control" rows="4" placeholder="Enter remarks here..."></textarea>
+                                {{ form.remarks }}
                             </div>
                         </div>
                     </div>
                 </div>
-                
-                <!-- submit button -->
+
+                <!-- Submit Button -->
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group row">
-                            <label class="col-sm-5 col-form-label"></label>
                             <div class="col-sm-1">
                                 <button type="submit" class="btn btn-primary float-right">
                                     Submit <i class="fas fa-paper-plane"></i>
@@ -168,48 +156,3 @@
         </div>
     </div>
 </div>
-
-<!-- script -->
-<script>
-    // JavaScript code for handling staff tags
-    const staffInput = document.getElementById('staffInput');
-    const tagContainer = document.getElementById('tagContainer');
-    const staffCount = document.getElementById('staffCount');
-
-    function createTag(name) {
-        const tag = document.createElement('span');
-        tag.className = 'badge badge-primary';
-        tag.textContent = name;
-
-        const removeButton = document.createElement('button');
-        removeButton.type = 'button';
-        removeButton.className = 'btn-close';
-        removeButton.onclick = function() {
-            tagContainer.removeChild(tag);
-            updateStaffCount();
-        };
-
-        tag.appendChild(removeButton);
-        tagContainer.appendChild(tag);
-        updateStaffCount();
-    }
-
-    function updateStaffCount() {
-        staffCount.textContent = tagContainer.children.length;
-    }
-
-    staffInput.addEventListener('keypress', function(event) {
-        if (event.key === 'Enter') {
-            event.preventDefault();
-            const name = staffInput.value.trim();
-            if (name) {
-                createTag(name);
-                staffInput.value = '';
-            }
-        }
-    });
-
-    document.getElementById('staffCountBtn').addEventListener('click', function() {
-        alert('Total Staff Selected: ' + tagContainer.children.length);
-    });
-</script>
