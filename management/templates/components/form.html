@@ -1,158 +1,196 @@
-<div class="col-12 grid-margin">
-    <div class="card">
-        <div class="card-body">
-            <h4 class="card-title">WorkView's Today's Work</h4>
+<div class="container " style="max-width: 90vw; max-width: 1600px;">
+    <div class="card" style="background-color: white; border: none; border-radius: 12px; box-shadow: 0px 12px 30px rgba(0, 0, 0, 0.2);">
+        <div class="card-body px-4 py-5">
+            <h1 class="card-title text-center mb-4" style="color: #844fc1; font-weight: 800; font-size: 36px;">WorkView's Today's Work</h1>
+            <p class="card-description text-center mb-5" style="color: #844fc1; font-size: 20px;">Comprehensive Work Registration Form</p>
+
             <form method="POST" action="{% url 'create' %}" class="form-sample">
                 {% csrf_token %}
-                
-                <p class="card-description">Work Registration</p>
 
                 <!-- Date and Session Fields -->
-                <div class="row">
+                <div class="row mb-4 gx-3">
                     <div class="col-md-6">
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Date</label>
-                            <div class="col-sm-9">
-                                {{ form.date }}
-                                {% if form.date.errors %}
-                                    <div class="alert alert-danger">
-                                        {% for error in form.date.errors %}
-                                            <p>{{ error }}</p>
-                                        {% endfor %}
-                                    </div>
-                                {% endif %}
-                            </div>
+                        <div class="form-group">
+                            <label for="date" class="form-label">Date</label>
+                            <div class="solid-input">{{ form.date }}</div>
+                            {% if form.date.errors %}
+                                <div class="alert alert-danger mt-2">
+                                    {% for error in form.date.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Session</label>
-                            <div class="col-sm-9">
-                                <!-- Render the dropdown directly -->
-                                {{ form.session }}
-                                
-                                <!-- Display errors for the session field -->
-                                {% if form.session.errors %}
-                                    <div class="alert alert-danger">
-                                        {% for error in form.session.errors %}
-                                            <p>{{ error }}</p>
-                                        {% endfor %}
-                                    </div>
-                                {% endif %}
-                            </div>
+                        <div class="form-group">
+                            <label for="session" class="form-label">Session</label>
+                            <div class="solid-input">{{ form.session }}</div>
+                            {% if form.session.errors %}
+                                <div class="alert alert-danger mt-2">
+                                    {% for error in form.session.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
                         </div>
                     </div>
-                    
-                    
+                </div>
+
                 <!-- Task ID and Work Nature -->
-                <div class="form-group">
-                    <label for="task">Task ID</label>
-                    {{ form.task }}
-                    {% if form.task.errors %}
-                        <div class="alert alert-danger">
-                            {% for error in form.task.errors %}
-                                <p>{{ error }}</p>
-                            {% endfor %}
+                <div class="row mb-4 gx-3">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="task" class="form-label">Task ID</label>
+                            <div class="solid-input">{{ form.task }}</div>
+                            {% if form.task.errors %}
+                                <div class="alert alert-danger mt-2">
+                                    {% for error in form.task.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
                         </div>
-                    {% endif %}
-                </div>
-
-                <div class="form-group">
-                    <label for="work_nature">Work Nature</label>
-                    {{ form.work_nature }}
-                    {% if form.work_nature.errors %}
-                        <div class="alert alert-danger">
-                            {% for error in form.work_nature.errors %}
-                                <p>{{ error }}</p>
-                            {% endfor %}
-                        </div>
-                    {% endif %}
-                </div>
-
-                <!-- Staffs Input -->
-                <div class="row">
-                    <div class="col-md-8">
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Staffs</label>
-                            <div class="col-sm-9">
-                                {{ form.staffs }}
-                            </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="work_nature" class="form-label">Work Nature</label>
+                            <div class="solid-input">{{ form.work_nature }}</div>
+                            {% if form.work_nature.errors %}
+                                <div class="alert alert-danger mt-2">
+                                    {% for error in form.work_nature.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
+
+               <!-- Staffs and Remarks Input -->
+                    <div class="row mb-4">
+                        <!-- Staffs Input -->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="staffs" class="form-label">Staffs</label>
+                                <div class="solid-input">{{ form.staffs }}</div>
+                            </div>
+                        </div>
+
+                        <!-- Remarks Input -->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="remarks" class="form-label">Remarks</label>
+                                <div class="solid-input">{{ form.remarks }}</div>
+                            </div>
+                        </div>
+                    </div>
+
 
                 <!-- Timings Input -->
-                <div class="row">
+                <div class="row mb-4 gx-3">
                     <div class="col-md-6">
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">In Time</label>
-                            <div class="col-sm-9">
-                                {{ form.in_time }}
-                                {% if form.in_time.errors %}
-                                    <div class="alert alert-danger">
-                                        {% for error in form.in_time.errors %}
-                                            <p>{{ error }}</p>
-                                        {% endfor %}
-                                    </div>
-                                {% endif %}
-                            </div>
+                        <div class="form-group">
+                            <label for="in_time" class="form-label">In Time</label>
+                            <div class="solid-input">{{ form.in_time }}</div>
+                            {% if form.in_time.errors %}
+                                <div class="alert alert-danger mt-2">
+                                    {% for error in form.in_time.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Out Time</label>
-                            <div class="col-sm-9">
-                                {{ form.out_time }}
-                                {% if form.out_time.errors %}
-                                    <div class="alert alert-danger">
-                                        {% for error in form.out_time.errors %}
-                                            <p>{{ error }}</p>
-                                        {% endfor %}
-                                    </div>
-                                {% endif %}
-                            </div>
+                        <div class="form-group">
+                            <label for="out_time" class="form-label">Out Time</label>
+                            <div class="solid-input">{{ form.out_time }}</div>
+                            {% if form.out_time.errors %}
+                                <div class="alert alert-danger mt-2">
+                                    {% for error in form.out_time.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
 
                 <!-- Location Input -->
-                <div class="form-group">
-                    <label for="location">Location</label>
-                    {{ form.location }}
-                    {% if form.location.errors %}
-                        <div class="alert alert-danger">
-                            {% for error in form.location.errors %}
-                                <p>{{ error }}</p>
-                            {% endfor %}
-                        </div>
-                    {% endif %}
-                </div>
-
-                <!-- Remarks Input -->
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Remarks</label>
-                            <div class="col-sm-9">
-                                {{ form.remarks }}
-                            </div>
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="location" class="form-label">Location</label>
+                            <div class="solid-input">{{ form.location }}</div>
+                            {% if form.location.errors %}
+                                <div class="alert alert-danger mt-2">
+                                    {% for error in form.location.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
+
+                
+                
 
                 <!-- Submit Button -->
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group row">
-                            <div class="col-sm-1">
-                                <button type="submit" class="btn btn-primary float-right">
-                                    Submit <i class="fas fa-paper-plane"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+                <div class="text-center mt-4">
+                    <button type="submit" class="btn btn-primary px-5 py-3">
+                        Submit <i class="fas fa-paper-plane"></i>
+                    </button>
                 </div>
             </form>
         </div>
     </div>
 </div>
+
+<style>
+    .solid-input {
+        font-size: 18px;
+        color: #333;
+        font-weight: 500;
+        background-color: #f5f5f5;
+        border-radius: 8px;
+        width: 100%;
+        display: block;
+        padding: 12px;
+    }
+
+    .form-label {
+        font-size: 16px;
+        font-weight: 600;
+        margin-bottom: 8px;
+    }
+
+    .btn-primary:hover {
+        background-color: #6a3ab5;
+        color: white;
+    }
+
+    body {
+        background-color: #f0f0f5;
+    }
+
+    .row.gx-3 > [class*="col-"] {
+        padding-right: 8px;
+        padding-left: 8px;
+    }
+
+    @media (max-width: 768px) {
+        .solid-input {
+            font-size: 12.8px;
+        }
+
+        .form-label {
+            font-size: 12px;
+        }
+
+        .btn-primary {
+            font-size: 18px;
+        }
+    }
+</style>

@@ -12,6 +12,7 @@ urlpatterns = [
     path('manage_attendance/', views.manage_attendance, name='manage_attendance'),
     path('worker_details/', views.worker_details, name='worker_details'),
     path('submissionsuccess/', views.success, name='success'),
+
     
 
 ]
