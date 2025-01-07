@@ -1,0 +1,21 @@
+task,work_nature,date,session,in_time,out_time,location,remarks,staffs
+1,manual,2025-01-08,afternoon,15:10:00,18:13:00,BOYS HOSTEL,Nil,betaValue, gammaCount
+2,machine,2025-01-09,forenoon,08:00:00,12:00:00,GIRLS HOSTEL,Nil,alphaTest, deltaMark
+3,manual,2025-01-10,afternoon,14:00:00,17:00:00,STAFF QUARTERS,Nil,betaValue, alphaTest
+4,machine,2025-01-11,forenoon,07:45:00,11:45:00,AS BLOCK,Nil,omegaTest, deltaMark
+5,manual,2025-01-12,afternoon,16:00:00,19:00:00,IB BLOCK,Nil,alphaValue, betaValue
+6,machine,2025-01-13,forenoon,09:00:00,13:00:00,SF BLOCK,Nil,thetaTest, gammaMark
+7,manual,2025-01-14,afternoon,14:30:00,17:30:00,MECH BLOCK,Nil,betaTest, omegaValue
+8,machine,2025-01-15,forenoon,06:30:00,10:30:00,AERO/RESEARCH BLOCK,Nil,deltaTest, alphaMark
+9,manual,2025-01-16,afternoon,17:00:00,20:00:00,MEDICAL CENTER,Nil,gammaTest, alphaValue
+10,machine,2025-01-17,forenoon,08:30:00,12:30:00,BOYS HOSTEL,Nil,omegaMark, thetaValue
+11,manual,2025-01-18,afternoon,15:45:00,18:45:00,GIRLS HOSTEL,Nil,alphaTest, betaCount
+12,machine,2025-01-19,forenoon,07:15:00,11:15:00,STAFF QUARTERS,Nil,betaMark, gammaCount
+13,manual,2025-01-20,afternoon,13:00:00,16:00:00,AS BLOCK,Nil,deltaValue, omegaTest
+14,machine,2025-01-21,forenoon,10:00:00,14:00:00,IB BLOCK,Nil,thetaTest, alphaTest
+15,manual,2025-01-22,afternoon,14:15:00,17:15:00,SF BLOCK,Nil,omegaValue, deltaCount
+16,machine,2025-01-23,forenoon,08:00:00,12:00:00,MECH BLOCK,Nil,alphaTest, gammaTest
+17,manual,2025-01-24,afternoon,16:30:00,19:30:00,AERO/RESEARCH BLOCK,Nil,betaTest, omegaMark
+18,machine,2025-01-25,forenoon,06:45:00,10:45:00,MEDICAL CENTER,Nil,thetaTest, alphaMark
+19,manual,2025-01-26,afternoon,15:00:00,18:00:00,BOYS HOSTEL,Nil,deltaValue, betaCount
+20,machine,2025-01-27,forenoon,09:30:00,13:30:00,GIRLS HOSTEL,Nil,omegaMark, deltaTest

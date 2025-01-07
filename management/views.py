@@ -97,16 +97,15 @@ def edit_task(request, task_id):
         action = request.POST.get('action', '')
         
         if action == 'delete':
-            # Handle the delete operation
             task.delete()
-            return redirect('manage')  # Redirect to task list or some other page
+            return redirect('manage') 
 
         elif action == 'edit':
             
             form = WorkForm(request.POST, instance=task)
             if form.is_valid():
                 form.save()
-                return redirect('manage', task_id=task.id)  # Redirect to task detail or some other page
+                return redirect('manage') 
     
     # Default form rendering logic
     form = WorkForm(instance=task)
