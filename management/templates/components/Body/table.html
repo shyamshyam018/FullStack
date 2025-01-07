@@ -7,11 +7,9 @@
             <tr>
               <th>Task ID</th>
               <th>Timing</th>
-              
               <th>Work Nature</th>
               <th>Staff Count</th>
               <th>Location</th>
-              
               <th>Session</th>
               <th>Actions</th>
             </tr>
@@ -27,14 +25,20 @@
               <td>{{ task.session|capfirst }}</td>
               <td>
                 <div class="d-flex align-items-center">
-                  <button type="button" class="btn btn-success btn-sm btn-icon-text me-3">
-                    Edit
-                    <i class="typcn typcn-edit btn-icon-append"></i>                          
-                  </button>
-                  <button type="button" class="btn btn-danger btn-sm btn-icon-text">
-                    Delete
-                    <i class="typcn typcn-delete-outline btn-icon-append"></i>                          
-                  </button>
+                  <!-- Edit Button -->
+                  <a href="{% url 'edit_task' task_id=task.id %}" class="btn btn-success btn-sm btn-icon-text me-3">
+                      Edit
+                      <i class="typcn typcn-edit btn-icon-append"></i>                          
+                  </a>
+                  
+                  <!-- Delete Button -->
+                  <form method="POST" action="{% url 'delete_task' task_id=task.id %}">
+                      {% csrf_token %}
+                      <button type="submit" class="btn btn-danger btn-sm btn-icon-text">
+                          Delete
+                          <i class="typcn typcn-delete-outline btn-icon-append"></i>                          
+                      </button>
+                  </form>
                 </div>
               </td>
             </tr>

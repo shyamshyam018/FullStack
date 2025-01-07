@@ -8,7 +8,7 @@
             <p class="mb-0 text-muted">Peak Work Hours</p>
             <p class="mb-0 text-muted">All Days</p>
           </div>
-          <canvas id="PeakHourGraph" class="mt-auto" height="100px"></canvas>
+          <canvas id="PeakHourGraph" class="mt-auto"></canvas>
         </div>
       </div>
     </div>
@@ -29,7 +29,7 @@
               <h6 class="mb-0">5900</h6>
             </div>
           </div>
-          <canvas id="ProductivityGraph" class="mt-auto" height="65"></canvas>
+          <canvas id="ProductivityGraph" class="mt-auto" ></canvas>
         </div>
       </div>
     </div>
@@ -83,7 +83,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let PeakHourGraph = new Chart(ctx1, {
   type: 'line',
   data: {
-    labels: ["8AM", "9AM", "10AM", "11AM", "12PM", "13PM", "14PM", "15PM", "16PM", "17PM", "18PM", "19PM"],
+    labels: ["8am", "9am", "10am", "11am", "12pm", "13pm", "14pm", "15pm", "16pm", "17pm", "18pm", "19pm"],
     datasets: [{
       data: [1, 3, 2, 5, 4, 8, 6, 7, 9, 10, 5, 3],
       backgroundColor: graphGradient1,
@@ -97,8 +97,8 @@ document.addEventListener("DOMContentLoaded", function () {
   },
   options: {
     responsive: true,
-    maintainAspectRatio: true, // Allow it to stretch in height
-    aspectRatio: 2, // Adjust aspect ratio to control the height-to-width ratio
+    maintainAspectRatio: true,
+    aspectRatio: 2,
     scales: {
       x: {
         border: { display: true },
@@ -115,7 +115,8 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     },
     plugins: {
-      legend: { display: false }
+      legend: { display: false },
+      labels: { color: "#003c7c" },
     }
   }
 });
@@ -129,30 +130,30 @@ document.addEventListener("DOMContentLoaded", function () {
     // Parse data from template context
     const productivityData = JSON.parse('{{ productivity_data|escapejs }}');
 
-    // Extract labels (dates) and data (hours worked)
+
     const labels = Object.keys(productivityData); // Dates
     const data = Object.values(productivityData); // Hours worked
 
     let ProductivityGraph = new Chart(ctx2, {
       type: 'line',
       data: {
-        labels: labels, // Dynamic labels from backend
+        labels: labels,
         datasets: [
           {
-            data: data, // Dynamic data from backend
+            data: data, 
             backgroundColor: '#2981d7',
             borderColor: '#2981d7',
             borderWidth: 2,
             fill: 'origin',
             label: "Hours Worked",
-            tension: 0.35,
-            pointRadius: 2,
+            pointRadius: 1,
+            tension: 0.4,
           },
         ]
       },
       options: {
         responsive: true,
-        maintainAspectRatio: true,
+        maintainAspectRatio: true, 
         aspectRatio: 2,
         scales: {
           x: {
@@ -161,7 +162,7 @@ document.addEventListener("DOMContentLoaded", function () {
             ticks: { color: "#6C7383", display: true },
           },
           y: {
-            beginAtZero: true,
+            beginAtZero: false,
             border: { display: true },
             grid: { display: true },
             ticks: {
@@ -173,7 +174,7 @@ document.addEventListener("DOMContentLoaded", function () {
         },
         plugins: {
           legend: {
-            display: true,
+            display: false,
             labels: { color: "#003c7c" },
           },
         },
@@ -182,76 +183,53 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-  document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function () {
   if ($("#EfficiencyGraph").length) {
     const ctx3 = document.getElementById('EfficiencyGraph').getContext("2d");
-      new Chart(ctx3, {
-        type: 'bar',
-        data: {
-					labels: ["8AM", "9AM", "10PM", "11AM", "12PM", "13PM", "14PM", "15PM", "16PM", "17PM","18PM"],
-          datasets: [
-            {
-              label: 'Work Done',
-              data: [150, 105, 125, 89, 99, 120, 70, 100, 109, 100, 75, 95, 125, 150, 100, 145, 100, 94],
-              backgroundColor: ['#3b86d1', '#3b86d1', '#3b86d1', '#3b86d1', '#3b86d1','#3b86d1', '#3b86d1',   '#3b86d1', '#3b86d1', '#b4d5f6', '#b4d5f6', '#b4d5f6', '#b4d5f6', '#b4d5f6' ]
-            }
-          ]
-        },
-				options: {
-          responsive: true,
-          maintainAspectRatio: true,
-          aspectRatio: 2,
-          elements: {
-            line: {
-                tension: .4,
-            }
-          },
-          scales: {
-            x: {
-              border: {
-                display: false
-              },
-              grid: {
-                display: false,
-                drawTicks: true,
-              },
-              ticks: {
-                color: "#6C7383",
-                display:false,
-                beginAtZero: false,
-                steps: 100,
-                stepValue: 5,
-                max: 150
-              },
-            },
-            y: {
-              beginAtZero: true,
-              border: {
-                display: false
-              },
-              grid: {
-                display:false,
-              },
-              ticks: {
-                color: "#6C7383",
-                beginAtZero: false,
-                stepsize:10,
-                display:false,
-              },
+    const efficiencyData = JSON.parse('{{ efficiency_data|escapejs }}');
+
+    new Chart(ctx3, {
+      type: 'bar',
+      data: {
+        labels: ['Forenoon', 'Midday', 'Afternoon'], 
+        datasets: [
+          {
+            label: 'Work Done',
+            data: efficiencyData,  
+            backgroundColor: ['#3b86d1', '#b4d5f6', '#3b86d1'] // Colors for each session
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: true,
+        aspectRatio: 2,
+        scales: {
+          x: {
+            grid: { display: false },
+            ticks: {
+              color: "#6C7383",
+              beginAtZero: true
             }
           },
-          plugins: {
-            legend: {
-                display: false,
-                labels: {
-                    color: 'rgb(255, 99, 132)'
-                }
+          y: {
+            beginAtZero: true,
+            grid: { display: false },
+            ticks: {
+              color: "#6C7383",
+              stepSize: 1
             }
           }
         },
-      });
-    }
-  });
+        plugins: {
+          legend: {
+            display: false
+          }
+        }
+      }
+    });
+  }
+});
 
   document.addEventListener("DOMContentLoaded", function () {
   if ($("#LocationGraph").length) {

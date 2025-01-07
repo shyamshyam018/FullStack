@@ -1,7 +1,5 @@
 from django.urls import path
 from . import views
-from django.views.generic import TemplateView
-
 
 urlpatterns = [
     path('', views.home, name='home'),
@@ -12,7 +10,6 @@ urlpatterns = [
     path('manage_attendance/', views.manage_attendance, name='manage_attendance'),
     path('worker_details/', views.worker_details, name='worker_details'),
     path('submissionsuccess/', views.success, name='success'),
-
-    
-
+    path('manage/edit_task/<int:task_id>/', views.edit_task, name='edit_task'),
+    path('manage/delete_task/<int:task_id>/', views.delete_task, name='delete_task'),  
 ]

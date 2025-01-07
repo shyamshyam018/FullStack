@@ -1,0 +1,201 @@
+<div class="content-wrapper">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Edit Task</h4>
+            <form method="POST" action="{% url 'edit_task' task_id=task.id %}" class="form-sample">
+                {% csrf_token %}
+                
+                <!-- Hidden input to indicate if it's a delete action -->
+                <input type="hidden" name="action" value="edit">
+
+                <!-- Date and Session Fields -->
+                <div class="row mb-4 gx-3">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="date" class="form-label">Date</label>
+                            <div class="solid-input">{{ form.date }}</div>
+                            {% if form.date.errors %}
+                                <div class="alert alert-danger mt-2">
+                                    {% for error in form.date.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="session" class="form-label">Session</label>
+                            <div class="solid-input">{{ form.session }}</div>
+                            {% if form.session.errors %}
+                                <div class="alert alert-danger mt-2">
+                                    {% for error in form.session.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Task ID and Work Nature -->
+                <div class="row mb-4 gx-3">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="task" class="form-label">Task ID</label>
+                            <div class="solid-input">{{ form.task }}</div>
+                            {% if form.task.errors %}
+                                <div class="alert alert-danger mt-2">
+                                    {% for error in form.task.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="work_nature" class="form-label">Work Nature</label>
+                            <div class="solid-input">{{ form.work_nature }}</div>
+                            {% if form.work_nature.errors %}
+                                <div class="alert alert-danger mt-2">
+                                    {% for error in form.work_nature.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Staffs and Remarks Input -->
+                <div class="row mb-4">
+                    <!-- Staffs Input -->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="staffs" class="form-label">Staffs</label>
+                            <div class="solid-input">{{ form.staffs }}</div>
+                        </div>
+                    </div>
+
+                    <!-- Remarks Input -->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="remarks" class="form-label">Remarks</label>
+                            <div class="solid-input">{{ form.remarks }}</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Timings Input -->
+                <div class="row mb-4 gx-3">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="in_time" class="form-label">In Time</label>
+                            <div class="solid-input">{{ form.in_time }}</div>
+                            {% if form.in_time.errors %}
+                                <div class="alert alert-danger mt-2">
+                                    {% for error in form.in_time.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="out_time" class="form-label">Out Time</label>
+                            <div class="solid-input">{{ form.out_time }}</div>
+                            {% if form.out_time.errors %}
+                                <div class="alert alert-danger mt-2">
+                                    {% for error in form.out_time.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Location Input -->
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="location" class="form-label">Location</label>
+                            <div class="solid-input">{{ form.location }}</div>
+                            {% if form.location.errors %}
+                                <div class="alert alert-danger mt-2">
+                                    {% for error in form.location.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="d-flex align-items-center">
+                    <button type="submit" class="btn btn-success btn-sm btn-icon-text me-3">
+                        Save
+                        <i class="typcn typcn-edit btn-icon-append"></i>
+                    </button>
+
+                    <!-- Delete Button -->
+                    <button type="submit" name="action" value="delete" class="btn btn-danger btn-sm btn-icon-text">
+                        Delete
+                        <i class="typcn typcn-delete-outline btn-icon-append"></i>
+                    </button>
+                </div>
+                
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+    .solid-input {
+        font-size: 18px;
+        color: #333;
+        font-weight: 500;
+        background-color: #f5f5f5;
+        border-radius: 8px;
+        width: 100%;
+        display: block;
+        padding: 12px;
+    }
+
+    .form-label {
+        font-size: 16px;
+        font-weight: 600;
+        margin-bottom: 8px;
+    }
+
+    .btn-primary:hover {
+        background-color: #6a3ab5;
+        color: white;
+    }
+
+    body {
+        background-color: #f0f0f5;
+    }
+
+    .row.gx-3 > [class*="col-"] {
+        padding-right: 8px;
+        padding-left: 8px;
+    }
+
+    @media (max-width: 768px) {
+        .solid-input {
+            font-size: 12.8px;
+        }
+
+        .form-label {
+            font-size: 12px;
+        }
+
+        .btn-primary {
+            font-size: 18px;
+        }
+    }
+</style>

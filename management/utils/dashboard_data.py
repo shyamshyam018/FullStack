@@ -125,6 +125,26 @@ def get_piechart_data(filter_by):
 
 
 
+
+def calculate_session_efficiency(works):
+    session_efficiency = {'forenoon': 0, 'midday': 0, 'afternoon': 0}
+
+    for work in works:
+        start_time = work.in_time
+        end_time = work.out_time
+
+        if end_time.hour < 12:
+            session_efficiency['forenoon'] += 1
+        
+        elif start_time.hour <= 12 and end_time.hour >= 12:
+            session_efficiency['midday'] += 1
+
+        if start_time.hour >= 12:
+            session_efficiency['afternoon'] += 1
+    
+    return session_efficiency
+
+
 def generate_dashboard_data():
     # Query all the tasks (works)
     works = Work.objects.all()
@@ -148,12 +168,11 @@ def generate_dashboard_data():
             - timedelta(hours=work.in_time.hour, minutes=work.in_time.minute)
         )
         duration_in_hours = duration.total_seconds() / 3600  # Convert seconds to hours
-        daily_productivity[date.strftime('%Y-%m-%d')] = daily_productivity.get(date.strftime('%Y-%m-%d'), 0) + duration_in_hours
+        daily_productivity[date.strftime('%d/%m/%y')] = daily_productivity.get(date.strftime('%d/%m/%y'), 0) + duration_in_hours
+
         
-    # Efficiency and Other Stats Graph
-    session_efficiency = {'forenoon': 0, 'afternoon': 0}
-    for work in works:
-        session_efficiency[work.session] += 1
+
+
 
     # Location-wise task distribution
     location_data = {}
@@ -163,6 +182,5 @@ def generate_dashboard_data():
     return {
         'peak_time_data': hour_data,
         'productivity_data': daily_productivity,
-        'efficiency_data': session_efficiency,
         'location_data': location_data,
     }
