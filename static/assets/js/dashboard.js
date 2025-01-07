@@ -395,6 +395,8 @@
         },
       });
 
+      
+
     }
 
     if ($("#income-chart").length) {

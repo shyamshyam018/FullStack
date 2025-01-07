@@ -8,7 +8,7 @@
             <p class="mb-0 text-muted">Peak Work Hours</p>
             <p class="mb-0 text-muted">All Days</p>
           </div>
-          <canvas id="PeakHourGraph" class="mt-auto" height="65"></canvas>
+          <canvas id="PeakHourGraph" class="mt-auto" height="100px"></canvas>
         </div>
       </div>
     </div>
@@ -29,7 +29,7 @@
               <h6 class="mb-0">5900</h6>
             </div>
           </div>
-          <canvas id="sales-chart-a" class="mt-auto" height="65"></canvas>
+          <canvas id="ProductivityGraph" class="mt-auto" height="65"></canvas>
         </div>
       </div>
     </div>
@@ -43,7 +43,7 @@
             <h3 class="mb-">27632</h3>
             <h3 class="mb-">78%</h3>
           </div>
-          <canvas id="sales-chart-b" class="mt-auto" height="38"></canvas>
+          <canvas id="EfficiencyGraph" class="mt-auto" height="38"></canvas>
         </div>
       </div>
     </div>
@@ -54,12 +54,12 @@
             <div class="col-6 d-flex flex-column justify-content-between">
               <p class="text-muted">CPU</p>
               <h4>55%</h4>
-              <canvas id="cpu-chart" class="mt-auto"></canvas>
+              <canvas id="LocationGraph" class="mt-auto"></canvas>
             </div>
             <div class="col-6 d-flex flex-column justify-content-between">
               <p class="text-muted">Memory</p>
               <h4>123,65</h4>
-              <canvas id="memory-chart" class="mt-auto"></canvas>
+              <canvas id="SkibidiGraph" class="mt-auto"></canvas>
             </div>
           </div>
         </div>
@@ -68,9 +68,11 @@
   </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
 <script>
- document.addEventListener("DOMContentLoaded", function () {
+
+document.addEventListener("DOMContentLoaded", function () {
   if ($("#PeakHourGraph").length) {
     const ctx1 = document.getElementById('PeakHourGraph').getContext("2d");
 
@@ -119,5 +121,279 @@
 });
   }
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+  if ($("#ProductivityGraph").length) {
+    const ctx2 = document.getElementById('ProductivityGraph').getContext("2d");
+
+    // Parse data from template context
+    const productivityData = JSON.parse('{{ productivity_data|escapejs }}');
+
+    // Extract labels (dates) and data (hours worked)
+    const labels = Object.keys(productivityData); // Dates
+    const data = Object.values(productivityData); // Hours worked
+
+    let ProductivityGraph = new Chart(ctx2, {
+      type: 'line',
+      data: {
+        labels: labels, // Dynamic labels from backend
+        datasets: [
+          {
+            data: data, // Dynamic data from backend
+            backgroundColor: '#2981d7',
+            borderColor: '#2981d7',
+            borderWidth: 2,
+            fill: 'origin',
+            label: "Hours Worked",
+            tension: 0.35,
+            pointRadius: 2,
+          },
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: true,
+        aspectRatio: 2,
+        scales: {
+          x: {
+            border: { display: true },
+            grid: { display: true, drawTicks: true },
+            ticks: { color: "#6C7383", display: true },
+          },
+          y: {
+            beginAtZero: true,
+            border: { display: true },
+            grid: { display: true },
+            ticks: {
+              color: "#6C7383",
+              stepSize: 1,
+              display: true,
+            },
+          },
+        },
+        plugins: {
+          legend: {
+            display: true,
+            labels: { color: "#003c7c" },
+          },
+        },
+      },
+    });
+  }
+});
+
+  document.addEventListener("DOMContentLoaded", function () {
+  if ($("#EfficiencyGraph").length) {
+    const ctx3 = document.getElementById('EfficiencyGraph').getContext("2d");
+      new Chart(ctx3, {
+        type: 'bar',
+        data: {
+					labels: ["8AM", "9AM", "10PM", "11AM", "12PM", "13PM", "14PM", "15PM", "16PM", "17PM","18PM"],
+          datasets: [
+            {
+              label: 'Work Done',
+              data: [150, 105, 125, 89, 99, 120, 70, 100, 109, 100, 75, 95, 125, 150, 100, 145, 100, 94],
+              backgroundColor: ['#3b86d1', '#3b86d1', '#3b86d1', '#3b86d1', '#3b86d1','#3b86d1', '#3b86d1',   '#3b86d1', '#3b86d1', '#b4d5f6', '#b4d5f6', '#b4d5f6', '#b4d5f6', '#b4d5f6' ]
+            }
+          ]
+        },
+				options: {
+          responsive: true,
+          maintainAspectRatio: true,
+          aspectRatio: 2,
+          elements: {
+            line: {
+                tension: .4,
+            }
+          },
+          scales: {
+            x: {
+              border: {
+                display: false
+              },
+              grid: {
+                display: false,
+                drawTicks: true,
+              },
+              ticks: {
+                color: "#6C7383",
+                display:false,
+                beginAtZero: false,
+                steps: 100,
+                stepValue: 5,
+                max: 150
+              },
+            },
+            y: {
+              beginAtZero: true,
+              border: {
+                display: false
+              },
+              grid: {
+                display:false,
+              },
+              ticks: {
+                color: "#6C7383",
+                beginAtZero: false,
+                stepsize:10,
+                display:false,
+              },
+            }
+          },
+          plugins: {
+            legend: {
+                display: false,
+                labels: {
+                    color: 'rgb(255, 99, 132)'
+                }
+            }
+          }
+        },
+      });
+    }
+  });
+
+  document.addEventListener("DOMContentLoaded", function () {
+  if ($("#LocationGraph").length) {
+    const ctx4 = document.getElementById('LocationGraph');
+      new Chart(ctx4, {
+        type: 'bar',
+        data: {
+					labels: ["A", "B", "C", "D", "E","F", "G", "H", "I", "J", "K", "L"],
+          datasets: [
+            {
+              label: 'Profit',
+              data: [45, 38, 29, 35, 37, 38, 24, 28, 19, 33, 42, 48],
+              backgroundColor: '#dc3545',
+            }
+          ]
+        },
+				options: {
+          responsive: true,
+          maintainAspectRatio: true,
+          aspectRatio : 1,
+          elements: {
+            line: {
+                tension: .4,
+            }
+          },
+          scales: {
+            x: {
+              border: {
+                display: false
+              },
+              grid: {
+                display: false,
+                drawTicks: true,
+              },
+              ticks: {
+                color: "#6C7383",
+                display:false,
+                beginAtZero: false,
+                steps: 100,
+                stepValue: 5,
+                max: 150
+              },
+            },
+            y: {
+              beginAtZero: true,
+              border: {
+                display: false
+              },
+              grid: {
+                display:false,
+              },
+              ticks: {
+                color: "#6C7383",
+                beginAtZero: false,
+                stepsize:10,
+                display:false,
+              },
+            }
+          },
+          plugins: {
+            legend: {
+                display: false,
+                labels: {
+                    color: 'rgb(255, 99, 132)'
+                }
+            }
+          }
+        },
+      });
+    }
+  });
+ 
+  document.addEventListener("DOMContentLoaded", function () {
+  if ($("#SkibidiGraph").length) {
+    const ctx5 = document.getElementById('SkibidiGraph');
+      new Chart(ctx5, {
+        type: 'bar',
+        data: {
+					labels: ["A", "B", "C", "D", "E","F", "G", "H", "I", "J", "K", "L"],
+          datasets: [
+            {
+              label: 'Profit',
+              data: [38, 35, 23, 22, 35, 23, 24, 28, 19, 33, 30, 45],
+              backgroundColor: '#00c8bf',
+            }
+          ]
+        },
+				options: {
+          responsive: true,
+          maintainAspectRatio: true,
+          aspectRatio: 1,
+          elements: {
+            line: {
+                tension: .4,
+            }
+          },
+          scales: {
+            x: {
+              border: {
+                display: false
+              },
+              grid: {
+                display: false,
+                drawTicks: true,
+              },
+              ticks: {
+                color: "#6C7383",
+                display:false,
+                beginAtZero: false,
+                steps: 100,
+                stepValue: 5,
+                max: 150
+              },
+            },
+            y: {
+              beginAtZero: true,
+              border: {
+                display: false
+              },
+              grid: {
+                display:false,
+              },
+              ticks: {
+                color: "#6C7383",
+                beginAtZero: false,
+                stepsize:10,
+                display:false,
+              },
+            }
+          },
+          plugins: {
+            legend: {
+                display: false,
+                labels: {
+                    color: 'rgb(255, 99, 132)'
+                }
+            }
+          }
+        },
+      });
+
+    }
+  });
 
 </script>

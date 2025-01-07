@@ -130,19 +130,26 @@ def generate_dashboard_data():
     works = Work.objects.all()
 
     # Peak Time Graph - Number of tasks per hour
-    hour_data = {}
+    hour_labels = list(range(8, 20))  # Labels for hours 8AM to 7PM
+    hour_data = [0] * len(hour_labels)  # Initialize count array
+
     for work in works:
         hour = work.in_time.hour  # Extract hour from the in_time field
-        hour_data[hour] = hour_data.get(hour, 0) + 1
+        if hour in hour_labels:
+            index = hour_labels.index(hour)
+            hour_data[index] += 1
 
     # Productivity Graph - Hours worked per day
     daily_productivity = {}
     for work in works:
         date = work.date
-        duration = timedelta(hours=work.out_time.hour, minutes=work.out_time.minute) - timedelta(hours=work.in_time.hour, minutes=work.in_time.minute)
+        duration = (
+            timedelta(hours=work.out_time.hour, minutes=work.out_time.minute)
+            - timedelta(hours=work.in_time.hour, minutes=work.in_time.minute)
+        )
         duration_in_hours = duration.total_seconds() / 3600  # Convert seconds to hours
-        daily_productivity[date] = daily_productivity.get(date, 0) + duration_in_hours
-
+        daily_productivity[date.strftime('%Y-%m-%d')] = daily_productivity.get(date.strftime('%Y-%m-%d'), 0) + duration_in_hours
+        
     # Efficiency and Other Stats Graph
     session_efficiency = {'forenoon': 0, 'afternoon': 0}
     for work in works:

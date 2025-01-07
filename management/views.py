@@ -38,6 +38,8 @@ def profile_view(request):
 
 
 
+import json
+
 def home(request):
     task_data = get_table_data()
     filter_by = request.GET.get('filter_by', 'task')  
@@ -48,11 +50,12 @@ def home(request):
         'tasks': task_data,
         'chart_data': json.dumps(chart_data),  
         'selected_filter': filter_by,
-        'peak_time_data': graph_data['peak_time_data'],
-        'productivity_data': graph_data['productivity_data'],
-        'efficiency_data': graph_data['efficiency_data'],
-        'location_data': graph_data['location_data'],
+        'peak_time_data': json.dumps(graph_data['peak_time_data']), 
+        'productivity_data': json.dumps(graph_data['productivity_data']),  # Convert to JSON
+        'efficiency_data': json.dumps(graph_data['efficiency_data']),  # Convert to JSON
+        'location_data': json.dumps(graph_data['location_data']),  # Convert to JSON
     })
+
 
 
 
